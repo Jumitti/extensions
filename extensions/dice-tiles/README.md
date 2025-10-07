@@ -20,8 +20,7 @@ Dice Tiles is a fun and challenging game you can play directly in [Raycast](http
 ### Rewards
 
 - Win victories to unlock new life emojis.  
-- Milestone victories: 5, 10, 20, 40, 80, 160  
-- At 500+ victories, the life bar shows a random pattern of celebratory emojis 🎇  
+- Milestone victories 🎇  
 
 ### Shortcuts
 
