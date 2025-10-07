@@ -191,23 +191,29 @@ Press Shift + H for Help and Rules
 `;
 
   return (
-    <Detail
-      markdown={markdown}
-      actions={
-        <ActionPanel>
-          <Action title="Main Action" onAction={handleMainAction} />
-          <Action title="Toggle Help" onAction={() => setShowHelp(!showHelp)} shortcut={{ key: "h", modifiers: ["shift"] }} />
-          {Array.from({ length: NB_TILES }, (_, i) => (
-            <Action
-              key={i + 1}
-              title={`Select/Deselect ${i + 1}`}
-              onAction={() => toggleSelection(i + 1)}
-              shortcut={{ key: i === 9 ? "0" : `${i + 1}`, modifiers: ["shift"] }}
-            />
-          ))}
-          <Action title="Reset Game" onAction={resetGame} shortcut={{ key: "r", modifiers: ["shift"] }} />
-        </ActionPanel>
-      }
-    />
-  );
+      <Detail
+          markdown={markdown}
+          actions={
+            <ActionPanel>
+              <Action title="Main Action" onAction={handleMainAction} />
+              <Action
+                title="Toggle Help"
+                onAction={() => setShowHelp(!showHelp)}
+                shortcut={{ key: "h", modifiers: ["shift"] }}
+              />
+              <Action title="Select 1" onAction={() => toggleSelection(1)} shortcut={{ key: "1", modifiers: ["shift"] }} />
+              <Action title="Select 2" onAction={() => toggleSelection(2)} shortcut={{ key: "2", modifiers: ["shift"] }} />
+              <Action title="Select 3" onAction={() => toggleSelection(3)} shortcut={{ key: "3", modifiers: ["shift"] }} />
+              <Action title="Select 4" onAction={() => toggleSelection(4)} shortcut={{ key: "4", modifiers: ["shift"] }} />
+              <Action title="Select 5" onAction={() => toggleSelection(5)} shortcut={{ key: "5", modifiers: ["shift"] }} />
+              <Action title="Select 6" onAction={() => toggleSelection(6)} shortcut={{ key: "6", modifiers: ["shift"] }} />
+              <Action title="Select 7" onAction={() => toggleSelection(7)} shortcut={{ key: "7", modifiers: ["shift"] }} />
+              <Action title="Select 8" onAction={() => toggleSelection(8)} shortcut={{ key: "8", modifiers: ["shift"] }} />
+              <Action title="Select 9" onAction={() => toggleSelection(9)} shortcut={{ key: "9", modifiers: ["shift"] }} />
+              <Action title="Select 0" onAction={() => toggleSelection(10)} shortcut={{ key: "0", modifiers: ["shift"] }} />
+              <Action title="Reset Game" onAction={resetGame} shortcut={{ key: "r", modifiers: ["shift"] }} />
+            </ActionPanel>
+          }
+        />
+    );
 }

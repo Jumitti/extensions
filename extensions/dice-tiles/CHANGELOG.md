@@ -8,3 +8,6 @@
 ## 1.0.1
 - Fix victory bug
 - Add package-lock.json
+
+## 1.0.2
+- v1.0.2 Fix compatibility
