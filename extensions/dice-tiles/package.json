@@ -1,0 +1,36 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "dice-tiles",
+  "title": "Dice Tiles",
+  "description": "Roll dice and eliminate numbered tiles by matching their sum. Track victories, unlock rewards, and reach higher tiers of accomplishment.",
+  "icon": "🎲",
+  "author": "Minniti Julien",
+  "license": "MIT",
+  "repository": "https://github.com/Jumitti/dice-tiles",
+  "categories": ["Fun", "Games"],
+  "platforms": ["macOS", "Windows"],
+  "commands": [
+    {
+      "name": "index",
+      "title": "Dice Tiles",
+      "subtitle": "Tiles and Dice Challenge",
+      "description": "Play directly in Raycast by rolling dice and selecting tiles to match the sum.",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.103.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.0",
+    "@types/react": "^18.2.7",
+    "typescript": "^5.3.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.5.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop"
+  }
+}
