@@ -24,21 +24,15 @@ Dice Tiles is a fun and challenging game you can play directly in [Raycast](http
 
 ### Shortcuts
 
-- **Shift + 1…0** → Select/Deselect tiles  
+- **Shift + [1–0]** → Select/Deselect tiles
 - **Enter** → Roll / Validate / Restart  
 - **Shift + R** → Reset Game  
 - **Shift + H** → Toggle Help  
 
-## Installation
-
-1. Install [Raycast](https://www.raycast.com) if you haven’t already.  
-2. Clone this repository or download the extension.  
-3. Open Raycast, go to **Extensions → Developer → Import Extension**, and select the folder.  
-
 ## Links
 
 - [GitHub Repository](https://github.com/Jumitti/dice-tiles)  
-- [Buy Me a Coffee ☕](https://www.buymeacoffee.com/yourusername)
+- [Buy Me a Coffee ☕](https://www.buymeacoffee.com/Jumitti)
 
 ## License
 
