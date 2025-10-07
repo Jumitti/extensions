@@ -3,7 +3,7 @@
   "name": "dice-tiles",
   "title": "Dice Tiles",
   "description": "A minimalist dice-and-tiles elimination game. Roll dice, eliminate tiles matching their sum, and climb through reward tiers while tracking victories and defeats.",
-  "icon": "dice-tiles.jpg",
+  "icon": "dice-tiles.png",
   "author": "julien_minniti",
   "license": "MIT",
   "repository": "https://github.com/Jumitti/dice-tiles",
