@@ -1,23 +1,57 @@
-import js from "@eslint/js";
+// eslint.config.mjs
+import tsParser from "@typescript-eslint/parser";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import reactPlugin from "eslint-plugin-react";
+import jsoncPlugin from "eslint-plugin-jsonc";
+import jsoncParser from "jsonc-eslint-parser";
 import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import json from "@eslint/json";
-import { defineConfig } from "eslint/config";
 
-export default defineConfig([
+export default [
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "metadata/**",
+      "package*.json",
+      "tsconfig.json",
+      "**/*.d.ts",
+    ],
   },
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
-    files: ["**/*.json"],
-    plugins: { json },
-    language: "json/json",
-    extends: ["json/recommended"],
+    files: ["**/*.{js,ts,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: "module",
+        ecmaFeatures: { jsx: true },
+      },
+      globals: { ...globals.browser, ...globals.node },
+    },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+      react: reactPlugin,
+    },
+    rules: {
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
+    },
+    settings: {
+      react: { version: "detect" },
+    },
   },
-]);
+  {
+    files: ["**/*.json", "**/*.jsonc"],
+    languageOptions: {
+      parser: jsoncParser,
+    },
+    plugins: { jsonc: jsoncPlugin },
+    rules: {
+      "jsonc/array-bracket-spacing": ["error", "never"],
+      "jsonc/object-curly-spacing": ["error", "always"],
+      "jsonc/quotes": ["error", "double"],
+    },
+  },
+];
