@@ -8,10 +8,23 @@ const HP_INIT = 30;
 
 const REWARD_EMOJIS = ["❤️", "💖", "💎", "🏆", "🎖️", "👑"];
 const REWARD_THRESHOLDS = [0, 5, 10, 20, 40, 80, 160];
-const RANDOM_EMOJIS = ["💎", "🏆", "🌟", "🚀", "🎖️", "🛡️", "🎉", "🔥", "✨", "🥳"];
+const RANDOM_EMOJIS = [
+  "💎",
+  "🏆",
+  "🌟",
+  "🚀",
+  "🎖️",
+  "🛡️",
+  "🎉",
+  "🔥",
+  "✨",
+  "🥳",
+];
 
 export default function Command() {
-  const [tiles, setTiles] = useState<number[]>(Array.from({ length: NB_TILES }, (_, i) => i + 1));
+  const [tiles, setTiles] = useState<number[]>(
+    Array.from({ length: NB_TILES }, (_, i) => i + 1),
+  );
   const [hp, setHp] = useState(HP_INIT);
   const [lastRoll, setLastRoll] = useState<number[]>([]);
   const [selected, setSelected] = useState<number[]>([]);
@@ -33,7 +46,10 @@ export default function Command() {
       setDefeats(d ? Number(d) : 0);
 
       if (vNum >= 500) {
-        const pattern = Array.from({ length: HP_INIT }, () => RANDOM_EMOJIS[Math.floor(Math.random() * RANDOM_EMOJIS.length)]);
+        const pattern = Array.from(
+          { length: HP_INIT },
+          () => RANDOM_EMOJIS[Math.floor(Math.random() * RANDOM_EMOJIS.length)],
+        );
         setRandomLifePattern(pattern);
       }
     })();
@@ -43,7 +59,10 @@ export default function Command() {
     setVictories(v);
     await LocalStorage.setItem("victories", String(v));
     if (v >= 500 && randomLifePattern.length === 0) {
-      const pattern = Array.from({ length: HP_INIT }, () => RANDOM_EMOJIS[Math.floor(Math.random() * RANDOM_EMOJIS.length)]);
+      const pattern = Array.from(
+        { length: HP_INIT },
+        () => RANDOM_EMOJIS[Math.floor(Math.random() * RANDOM_EMOJIS.length)],
+      );
       setRandomLifePattern(pattern);
     }
   };
@@ -54,7 +73,8 @@ export default function Command() {
   };
 
   const getLifeEmoji = () => {
-    if (victories >= 500) return randomLifePattern.length ? randomLifePattern[0] : RANDOM_EMOJIS[0];
+    if (victories >= 500)
+      return randomLifePattern.length ? randomLifePattern[0] : RANDOM_EMOJIS[0];
     let idx = REWARD_THRESHOLDS.findIndex((t) => victories < t) - 1;
     if (idx < 0) idx = 0;
     if (idx >= REWARD_EMOJIS.length) idx = REWARD_EMOJIS.length - 1;
@@ -63,13 +83,18 @@ export default function Command() {
 
   const renderHP = () => {
     if (victories >= 500 && randomLifePattern.length)
-      return randomLifePattern.slice(0, Math.min(hp, HP_INIT)).join("") + ` (${hp})`;
+      return (
+        randomLifePattern.slice(0, Math.min(hp, HP_INIT)).join("") + ` (${hp})`
+      );
     return getLifeEmoji().repeat(Math.min(hp, HP_INIT)) + ` (${hp})`;
   };
 
   const rollDice = () => {
     if (gameOver) return;
-    const res = Array.from({ length: NB_DICE }, () => Math.floor(Math.random() * FACES) + 1);
+    const res = Array.from(
+      { length: NB_DICE },
+      () => Math.floor(Math.random() * FACES) + 1,
+    );
     setLastRoll(res);
     setSelected([]);
     setMessage(`${diceEmojis[res[0]]}  \n${diceEmojis[res[1]]}`);
@@ -77,7 +102,9 @@ export default function Command() {
 
   const toggleSelection = (n: number) => {
     if (!tiles.includes(n) || gameOver) return;
-    setSelected((prev) => (prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n]));
+    setSelected((prev) =>
+      prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n],
+    );
   };
 
   const validateSelection = async () => {
@@ -89,21 +116,27 @@ export default function Command() {
     if (selectedSum === diceSum) {
       setTiles((t) => t.filter((x) => !selected.includes(x)));
       if (tiles.length - selected.length === 0) {
-      const newVictories = victories + 1;
-      await saveVictories(newVictories);
-      setGameOver(true);
-      setMessage(`🎉 Victory! Cleared all tiles! Total victories: ${newVictories} ${getLifeEmoji()} — Press Enter to restart 🕹️`);
-    } else {
+        const newVictories = victories + 1;
+        await saveVictories(newVictories);
+        setGameOver(true);
+        setMessage(
+          `🎉 Victory! Cleared all tiles! Total victories: ${newVictories} ${getLifeEmoji()} — Press Enter to restart 🕹️`,
+        );
+      } else {
         setMessage(`✅ Good combination! You matched ${selectedSum} 🎯`);
       }
     } else {
       const newHp = Math.max(0, hp - diceSum);
       setHp(newHp);
-      setMessage(`❌ Bad combination (${selectedSum} ≠ ${diceSum}) → -${diceSum} HP 💔`);
+      setMessage(
+        `❌ Bad combination (${selectedSum} ≠ ${diceSum}) → -${diceSum} HP 💔`,
+      );
       if (newHp === 0) {
         await saveDefeats(defeats + 1);
         setGameOver(true);
-        setMessage(`💀 Defeat! Total defeats: ${defeats + 1}. Press Enter to restart 🕹️`);
+        setMessage(
+          `💀 Defeat! Total defeats: ${defeats + 1}. Press Enter to restart 🕹️`,
+        );
       }
     }
 
@@ -128,7 +161,8 @@ export default function Command() {
     else validateSelection();
   };
 
-  const renderTiles = () => tiles.map((n) => (selected.includes(n) ? `[${n}]` : `${n}`)).join(" ");
+  const renderTiles = () =>
+    tiles.map((n) => (selected.includes(n) ? `[${n}]` : `${n}`)).join(" ");
 
   const nextRewardIndex = REWARD_THRESHOLDS.findIndex((t) => victories < t);
   let rewardTeaser = "";
@@ -191,29 +225,73 @@ Press Shift + H for Help and Rules
 `;
 
   return (
-      <Detail
-          markdown={markdown}
-          actions={
-            <ActionPanel>
-              <Action title="Main Action" onAction={handleMainAction} />
-              <Action
-                title="Toggle Help"
-                onAction={() => setShowHelp(!showHelp)}
-                shortcut={{ key: "h", modifiers: ["shift"] }}
-              />
-              <Action title="Select 1" onAction={() => toggleSelection(1)} shortcut={{ key: "1", modifiers: ["shift"] }} />
-              <Action title="Select 2" onAction={() => toggleSelection(2)} shortcut={{ key: "2", modifiers: ["shift"] }} />
-              <Action title="Select 3" onAction={() => toggleSelection(3)} shortcut={{ key: "3", modifiers: ["shift"] }} />
-              <Action title="Select 4" onAction={() => toggleSelection(4)} shortcut={{ key: "4", modifiers: ["shift"] }} />
-              <Action title="Select 5" onAction={() => toggleSelection(5)} shortcut={{ key: "5", modifiers: ["shift"] }} />
-              <Action title="Select 6" onAction={() => toggleSelection(6)} shortcut={{ key: "6", modifiers: ["shift"] }} />
-              <Action title="Select 7" onAction={() => toggleSelection(7)} shortcut={{ key: "7", modifiers: ["shift"] }} />
-              <Action title="Select 8" onAction={() => toggleSelection(8)} shortcut={{ key: "8", modifiers: ["shift"] }} />
-              <Action title="Select 9" onAction={() => toggleSelection(9)} shortcut={{ key: "9", modifiers: ["shift"] }} />
-              <Action title="Select 0" onAction={() => toggleSelection(10)} shortcut={{ key: "0", modifiers: ["shift"] }} />
-              <Action title="Reset Game" onAction={resetGame} shortcut={{ key: "r", modifiers: ["shift"] }} />
-            </ActionPanel>
-          }
-        />
-    );
+    <Detail
+      markdown={markdown}
+      actions={
+        <ActionPanel>
+          <Action title="Main Action" onAction={handleMainAction} />
+          <Action
+            title="Toggle Help"
+            onAction={() => setShowHelp(!showHelp)}
+            shortcut={{ key: "h", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 1"
+            onAction={() => toggleSelection(1)}
+            shortcut={{ key: "1", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 2"
+            onAction={() => toggleSelection(2)}
+            shortcut={{ key: "2", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 3"
+            onAction={() => toggleSelection(3)}
+            shortcut={{ key: "3", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 4"
+            onAction={() => toggleSelection(4)}
+            shortcut={{ key: "4", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 5"
+            onAction={() => toggleSelection(5)}
+            shortcut={{ key: "5", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 6"
+            onAction={() => toggleSelection(6)}
+            shortcut={{ key: "6", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 7"
+            onAction={() => toggleSelection(7)}
+            shortcut={{ key: "7", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 8"
+            onAction={() => toggleSelection(8)}
+            shortcut={{ key: "8", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 9"
+            onAction={() => toggleSelection(9)}
+            shortcut={{ key: "9", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Select 0"
+            onAction={() => toggleSelection(10)}
+            shortcut={{ key: "0", modifiers: ["shift"] }}
+          />
+          <Action
+            title="Reset Game"
+            onAction={resetGame}
+            shortcut={{ key: "r", modifiers: ["shift"] }}
+          />
+        </ActionPanel>
+      }
+    />
+  );
 }

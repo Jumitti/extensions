@@ -3,8 +3,8 @@
   "name": "dice-tiles",
   "title": "Dice Tiles",
   "description": "A minimalist dice-and-tiles elimination game. Roll dice, eliminate tiles matching their sum, and climb through reward tiers while tracking victories and defeats.",
-  "icon": "🎲",
-  "author": "Minniti Julien",
+  "icon": "dice-tiles.jpg",
+  "author": "julien_minniti",
   "license": "MIT",
   "repository": "https://github.com/Jumitti/dice-tiles",
   "categories": [
@@ -29,12 +29,17 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@eslint/json": "^0.13.2",
     "@raycast/eslint-config": "^1.0.4",
     "@types/node": "^18.16.0",
     "@types/react": "^18.2.7",
-    "eslint": "^8.50.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
     "prettier": "^3.2.5",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "typescript-eslint": "^8.46.0"
   },
   "scripts": {
     "build": "ray build -e dist",

@@ -10,28 +10,28 @@ Dice Tiles is a fun and challenging game you can play directly in [Raycast](http
 
 ## Gameplay
 
-- Press **Enter** to roll the dice.  
-- Select tiles that sum up to the dice roll.  
-- Correct sum → tiles removed ✅  
-- Wrong sum → lose HP ❌  
-- HP 0 → Defeat 💀  
-- Clear all tiles → Victory 🎉  
+- Press **Enter** to roll the dice.
+- Select tiles that sum up to the dice roll.
+- Correct sum → tiles removed ✅
+- Wrong sum → lose HP ❌
+- HP 0 → Defeat 💀
+- Clear all tiles → Victory 🎉
 
 ### Rewards
 
-- Win victories to unlock new life emojis.  
-- Milestone victories 🎇  
+- Win victories to unlock new life emojis.
+- Milestone victories 🎇
 
 ### Shortcuts
 
 - **Shift + [1–0]** → Select/Deselect tiles
-- **Enter** → Roll / Validate / Restart  
-- **Shift + R** → Reset Game  
-- **Shift + H** → Toggle Help  
+- **Enter** → Roll / Validate / Restart
+- **Shift + R** → Reset Game
+- **Shift + H** → Toggle Help
 
 ## Links
 
-- [GitHub Repository](https://github.com/Jumitti/dice-tiles)  
+- [GitHub Repository](https://github.com/Jumitti/dice-tiles)
 - [Buy Me a Coffee ☕](https://www.buymeacoffee.com/Jumitti)
 
 ## License
