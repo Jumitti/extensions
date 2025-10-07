@@ -89,10 +89,11 @@ export default function Command() {
     if (selectedSum === diceSum) {
       setTiles((t) => t.filter((x) => !selected.includes(x)));
       if (tiles.length - selected.length === 0) {
-        const newVictories = victories + 1;
-        await saveVictories(newVictories);
-        setMessage(`🎉 Victory! Cleared all tiles! Total victories: ${newVictories} ${getLifeEmoji()}`);
-      } else {
+      const newVictories = victories + 1;
+      await saveVictories(newVictories);
+      setGameOver(true);
+      setMessage(`🎉 Victory! Cleared all tiles! Total victories: ${newVictories} ${getLifeEmoji()} — Press Enter to restart 🕹️`);
+    } else {
         setMessage(`✅ Good combination! You matched ${selectedSum} 🎯`);
       }
     } else {
